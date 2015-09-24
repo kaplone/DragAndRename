@@ -56,6 +56,8 @@ public class Drag_controller implements Initializable{
     private TreeTools tool;
 	
     private TreeItem<PathExtented> rootItem;
+    
+    private TreeItem<PathExtented> currentItem;
 
 	public static String getTemplate() {
 		return template;
@@ -63,12 +65,14 @@ public class Drag_controller implements Initializable{
 	
 	@FXML
 	public void onReload(){
-		populateRoot((Object) null);
+		
+		populateRoot();
+		
 	}
 	
-	public void populateRoot(Object newValue) {
+	public void populateRoot() {
 		
-		System.out.println(newValue);
+		
 		
 		box.getChildren().clear();
 		
@@ -77,14 +81,15 @@ public class Drag_controller implements Initializable{
 		tree_general  = new TreeView<PathExtented>(rootItem);
 		tree_general.setVisible(true);
         tree_general.setPrefWidth(500);
-        //tree_general.
-        tree_general.getSelectionModel().select((TreeItem<PathExtented>) newValue); 
-        
+       
         tree_general.getSelectionModel().selectedItemProperty().addListener( new ChangeListener<Object>() {
 
             @Override
             public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+ 
+            	currentItem = ((TreeItem<PathExtented>) newValue);
             	
+            	tree_general.getSelectionModel().select(currentItem);
             	populate(newValue);
 
 
@@ -131,28 +136,35 @@ public class Drag_controller implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
 
 		depart = new PathExtented(Paths.get("/home/autor/Desktop/Test_Rename"), "Test_Rename");
 		
 		tool = new TreeTools();
 		
 		rootItem = tool.createRoot(depart);
-		
+
 		tree_general  = new TreeView<PathExtented>(rootItem);
-		tree_general.setVisible(true);
-        tree_general.setPrefWidth(500);
-        
+		      
         tree_general.getSelectionModel().selectedItemProperty().addListener( new ChangeListener<Object>() {
 
             @Override
             public void changed(ObservableValue<?> observable, Object oldValue, Object newValue) {
+            	
+            	currentItem = ((TreeItem<PathExtented>) newValue);
 
-            	populateRoot(newValue);
+            	tree_general.getSelectionModel().select(currentItem);
+            	populate(newValue);
+
+
            };
         });	
+		
+		tree_general.setVisible(true);
+        tree_general.setPrefWidth(500);
         
         box.getChildren().add(tree_general);
+        
+       // populateRoot(); 
 	}
 
 }

@@ -137,7 +137,7 @@ public class Drag_controller implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		depart = new PathExtented(Paths.get("/home/autor/Desktop/Test_Rename"), "Test_Rename");
+		depart = new PathExtented(Paths.get("/home/kaplone/Desktop/Test_Rename"), "Test_Rename");
 		
 		tool = new TreeTools();
 		

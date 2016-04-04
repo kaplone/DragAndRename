@@ -38,7 +38,7 @@ public class CopyAndRename {
 
 	private static Path NewName(File file, Path path) {
 		
-		Path newPath = path.resolve(String.format(Drag_controller.getTemplate(), path.getFileName(), getNum(path)));
+		Path newPath = path.resolve(String.format(Drag_controller.getTemplate(), path.getParent().getFileName() , path.getFileName(), getNum(path)));
 		
 		return newPath;
 	}

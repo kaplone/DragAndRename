@@ -18,22 +18,7 @@ public class DragControl {
 	
 	        @Override
 	        public void handle(DragEvent event) {
-	        	
-	        	System.out.println(event);
-	        	
-	        	//System.out.println(event.getGestureSource());
-	        	System.out.println(event.getDragboard());
-	        	
-	        	System.out.println("OVER ... "  + dragTarget + " " + event.getDragboard().hasString());
-
-//	            if (event.getGestureSource() != dragTarget
-//	             && event.getDragboard().hasString()) {
-	        	
-            	System.out.println("/* allow for both copying and moving, whatever user chooses */");
-                /* allow for both copying and moving, whatever user chooses */
                 event.acceptTransferModes(TransferMode.COPY);
-                
-//	            }
 	            event.consume();
 	        }
 	    });
@@ -42,22 +27,17 @@ public class DragControl {
 	
 	        @Override
 	        public void handle(DragEvent event) {
-	        	
-	        	System.out.println("DROPPED ...");
+
 	            Dragboard db = event.getDragboard();
 	            boolean success = false;
-	            
-//	            if (db.hasString()) {
-	            	System.out.println(db.getContent(DataFormat.FILES));
-	            	CopyAndRename.copyAndRename(db, treeItem.getValue().getPath());	
-	            	drag_controller.populate(treeItem);
-	                success = true;       
-//	            }
+
+            	CopyAndRename.copyAndRename(db, treeItem.getValue().getPath());	
+            	drag_controller.populate(treeItem);
+                success = true;       
 	                
 	            /* let the source know whether the string was successfully 
 	             * transferred and used */
 	            event.setDropCompleted(success);
-	
 	            event.consume();
 	        }
 	    });

@@ -49,7 +49,7 @@ public class Drag_controller implements Initializable{
     
     private Path courant;
     
-    private static String template = "%s_%02d.jpg";
+    private static String template = "%s_%s_%02d.jpg";
     
     private PathExtented depart;
 	
